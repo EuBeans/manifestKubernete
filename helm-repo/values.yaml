@@ -5,14 +5,14 @@
 replicaCount: 3
 
 image:
-  repository: grafana
+  repository: postgres
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
 imagePullSecrets:
   - name: my-docker-secret
-  
+
 nameOverride: ""
 fullnameOverride: ""
 
