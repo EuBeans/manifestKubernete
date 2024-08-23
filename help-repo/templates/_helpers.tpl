@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "manifestKubernete.name" -}}
+{{- define "help-repo.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "manifestKubernete.fullname" -}}
+{{- define "help-repo.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "manifestKubernete.chart" -}}
+{{- define "help-repo.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "manifestKubernete.labels" -}}
-helm.sh/chart: {{ include "manifestKubernete.chart" . }}
-{{ include "manifestKubernete.selectorLabels" . }}
+{{- define "help-repo.labels" -}}
+helm.sh/chart: {{ include "help-repo.chart" . }}
+{{ include "help-repo.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "manifestKubernete.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "manifestKubernete.name" . }}
+{{- define "help-repo.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "help-repo.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "manifestKubernete.serviceAccountName" -}}
+{{- define "help-repo.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "manifestKubernete.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "help-repo.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
